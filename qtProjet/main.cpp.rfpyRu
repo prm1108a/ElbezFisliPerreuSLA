@@ -1,0 +1,50 @@
+#include <QApplication>
+#include <QPushButton>
+#include <window.h>
+#include <QTabWidget>
+#include <QLabel>
+#include <QGridLayout>
+#include <vector>
+#include <iostream>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <timelistwidget.h>
+#include <QTextEdit>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    TimeLine * timeLine = new TimeLine;
+
+    QGridLayout *layoutWindow = new QGridLayout;
+    QGridLayout * layoutLeftWindow = new QGridLayout;
+    QTextEdit *textFieldSearch = new QTextEdit;
+    textFieldSearch->setText("recherche");
+
+    layoutLeftWindow->addWidget(textFieldSearch, 0, 0);
+    layoutLeftWindow->addWidget(timeLine, 1, 0);
+
+    QFont font("Helvetica", 14, QFont::Normal);
+    QTabWidget * tab = new QTabWidget;
+    tab->addTab(new QLabel("Tableau de bord"), "Tableau de bord");
+    tab->addTab(new QLabel("Performances"), "Performances");
+    tab->addTab(new QLabel("Historique"), "Historique");
+    tab->addTab(new QLabel("Configuration"), "Configuration");
+    tab->setTabIcon(0,*(new QIcon("/home/mariep/workspace/qtProjet/agenda.png")));
+    tab->setTabIcon(1,*(new QIcon("/home/mariep/workspace/qtProjet/performances.png")));
+    tab->setTabIcon(2,*(new QIcon("/home/mariep/workspace/qtProjet/historique.png")));
+    tab->setTabIcon(3,*(new QIcon("/home/mariep/workspace/qtProjet/configuration.png")));
+    tab->setFont(font);
+    layoutWindow->addWidget(layoutLeftWindow, 0, 0);
+    layoutWindow->addWidget(tab, 0, 1);
+
+
+    QWidget * windowWidget = new QWidget;
+    windowWidget->setLayout(layoutWindow);
+    windowWidget->showMaximized();
+
+    return app.exec();
+}
+
